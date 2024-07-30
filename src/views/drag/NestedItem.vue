@@ -1,7 +1,7 @@
 <script lang="tsx">
-
 import { defineComponent } from 'vue';
 import Draggable from 'vuedraggable';
+// eslint-disable-next-line import/no-self-import
 import NestedItem from './NestedItem.vue';
 
 function cloneDeep(data: any) {
@@ -21,9 +21,11 @@ export default defineComponent({
       return cloneDeep(item);
     };
 
+    const a = 123;
+
     return () => (
       <div class="border-1px border-amber border-solid p-20px">
-        <n-button class=''>{props.item.name}</n-button>
+        <n-button class="">{props.item.name}</n-button>
         {props.item.children && (
           <Draggable
             list={props.item.children}

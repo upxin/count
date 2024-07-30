@@ -1,4 +1,3 @@
-
 ## Customize configuration dev环境有个vue的调试工具在页面下方 不要关闭 方便调试
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
@@ -23,7 +22,6 @@ pnpm build
 ### Naui地址
 [text](https://www.naiveui.com/zh-CN/os-theme/components/button)
 
-### 安装vscode 插件 vue-official（支持vue2 vue3） 卸载volar跟veter
-### 无eslint  使用 vue-official格式化即可
+### eslint 使用开源大佬的配置，对应我的vscode json配置请参考根目录的vscode.json
 
 ### <NButton :type="'primary'"></NButton> 类型提示要 ：type  才生效， 目前原因不明

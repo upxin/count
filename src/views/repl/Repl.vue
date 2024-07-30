@@ -6,5 +6,5 @@ import CodeMirror from '@vue/repl/codemirror-editor'
 </script>
 
 <template>
-  <Repl :editor="CodeMirror"/>
+  <Repl :editor="CodeMirror" class=""/>
 </template>

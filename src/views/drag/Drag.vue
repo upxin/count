@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import draggable from "vuedraggable";
-import NestedItem from "./NestedItem.vue"
+import NestedItem from"./NestedItem.vue"
 
 // import cloneDeep from 'lodash/cloneDeep';
 function cloneDeep(data){
