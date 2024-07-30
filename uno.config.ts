@@ -1,7 +1,7 @@
-import { defineConfig, presetUno, presetAttributify } from 'unocss'
-import presetWebFonts from '@unocss/preset-web-fonts'
-import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local'
-import presetIcons from '@unocss/preset-icons/browser'
+import { defineConfig, presetAttributify, presetUno } from 'unocss';
+import presetWebFonts from '@unocss/preset-web-fonts';
+import { createLocalFontProcessor } from '@unocss/preset-web-fonts/local';
+import presetIcons from '@unocss/preset-icons/browser';
 
 export default defineConfig({
   shortcuts: [
@@ -42,4 +42,4 @@ export default defineConfig({
       // }
     }),
   ],
-})
+});
