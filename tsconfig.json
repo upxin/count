@@ -6,6 +6,7 @@
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     "importHelpers": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
@@ -21,7 +22,6 @@
     "types": [
       "node",
       "vite/client",
-      "ant-design-vue/typings/global",
       "./auto-imports.d.ts",
       "./components.d.ts"
     ],

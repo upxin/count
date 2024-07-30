@@ -1,7 +1,6 @@
 <template>
-  <NButton :type="'primary'"></NButton>
+ <div class=""><n-button :type="'info'" :size="'small'">123</n-button></div>
 </template>
-
-<script lang="ts" setup>
-import {NButton} from 'naive-ui'
+<script lang='ts' setup>
+//
 </script>

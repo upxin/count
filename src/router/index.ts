@@ -16,6 +16,11 @@ const router = createRouter({
       name: 'repl',
       path: '/repl',
       component: () => import('@/views/repl/Repl.vue')
+    },
+    {
+      name: 'drag',
+      path: '/drag',
+      component: () => import('@/views/drag/Drag.vue')
     }
   ]
 })
