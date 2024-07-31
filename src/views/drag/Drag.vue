@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import draggable from 'vuedraggable';
-import NestedItem from './NestedItem.vue';
+import NestedItem from './NestedItem';
 
 // import cloneDeep from 'lodash/cloneDeep';
 function cloneDeep(data) {
@@ -35,9 +35,9 @@ watch(() => list2.value, (v) => {
       :clone="cloneItem"
     >
       <template #item="{ element }">
-        <span class="border-1px border-amber border-solid p-10px">
+        <div class="border-1px border-amber border-solid p-10px">
           {{ element.name }}
-        </span>
+        </div>
       </template>
     </draggable>
 
