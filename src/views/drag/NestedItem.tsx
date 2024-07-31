@@ -18,8 +18,6 @@ export default defineComponent({
       return cloneDeep(item);
     };
 
-    const a = 123;
-
     return () => (
       <div class="border-1px border-amber border-solid p-20px">
         <n-button class="">{props.item.name ?? '你好'}</n-button>
