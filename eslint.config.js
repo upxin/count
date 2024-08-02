@@ -10,6 +10,7 @@ export default antfu({
   },
   typescript: {
     overrides: {
+      'no-console': 'off',
       'ts/consistent-type-definitions': ['error', 'interface'],
     },
   },

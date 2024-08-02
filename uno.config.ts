@@ -7,6 +7,11 @@ export default defineConfig({
   shortcuts: [
     { logo: 'i-logos-vue w-6em h-6em transform transition-800' },
   ],
+  theme: {
+    colors: {
+      gray: 'var(--gray)',
+    },
+  },
   presets: [
     presetUno(),
     presetAttributify(),

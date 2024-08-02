@@ -19,15 +19,27 @@ export default defineConfig({
         'vue',
         '@vueuse/core',
         'vue-router',
+        {
+          'naive-ui': [
+            'useDialog',
+            'useMessage',
+            'useNotification',
+            'useLoadingBar',
+          ],
+        },
       ],
     }),
     Components({
-      // 自动导入组件tsx不能很好的提示类型 暂时不知道怎么解决
+      // tsx不能很好的提示类型 vue official插件的问题  如果想要类型提示现在只能在tsx组件中去手动再导入一次
+      dts: true,
       resolvers: [NaiveUiResolver()],
       dirs: ['src/components'],
+      extensions: ['vue', 'tsx'], // 让tsx组件也能支持全局自动导入
+      include: [/\.vue$/, /\.tsx$/, /\.vue\?vue/], // 让tsx组件内也能使用自动导入的组件
     }),
   ],
   resolve: {
+    extensions: ['.js', '.ts', '.json', '.tsx', '.vue'],
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },

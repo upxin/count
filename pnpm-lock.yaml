@@ -8,12 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@unocss/reset':
+        specifier: ^0.61.9
+        version: 0.61.9
       '@vue/repl':
         specifier: ^4.3.1
         version: 4.3.1
       '@vueuse/core':
         specifier: ^10.11.0
         version: 10.11.0(vue@3.4.34(typescript@5.4.5))
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
       naive-ui:
         specifier: ^2.39.0
         version: 2.39.0(vue@3.4.34(typescript@5.4.5))
@@ -36,6 +42,9 @@ importers:
       '@tsconfig/node20':
         specifier: ^20.1.4
         version: 20.1.4
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/node':
         specifier: ^20.14.5
         version: 20.14.12
@@ -939,6 +948,9 @@ packages:
 
   '@unocss/reset@0.61.5':
     resolution: {integrity: sha1-NZ4w/itpcy6+Qkx8P5QhwnySOV4=, tarball: http://registry.npm.release.ctripcorp.com/@unocss/reset/download/@unocss/reset-0.61.5.tgz}
+
+  '@unocss/reset@0.61.9':
+    resolution: {integrity: sha1-JV5P0DDTpViU3vp069LwSSALqYA=, tarball: http://registry.npm.release.ctripcorp.com/@unocss/reset/download/@unocss/reset-0.61.9.tgz}
 
   '@unocss/rule-utils@0.61.5':
     resolution: {integrity: sha1-4435fCyYjh2KlSzhoZ0zO7mZU90=, tarball: http://registry.npm.release.ctripcorp.com/@unocss/rule-utils/download/@unocss/rule-utils-0.61.5.tgz}
@@ -3648,6 +3660,8 @@ snapshots:
       '@unocss/rule-utils': 0.61.5
 
   '@unocss/reset@0.61.5': {}
+
+  '@unocss/reset@0.61.9': {}
 
   '@unocss/rule-utils@0.61.5':
     dependencies:
