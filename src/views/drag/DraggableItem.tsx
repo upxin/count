@@ -4,7 +4,7 @@ import { NGridItem, NTag } from 'naive-ui';
 import type { DragSchema } from './interface';
 import { DragItemProps } from './interface';
 import RenderComponent from './RenderComponent.vue';
-
+// test
 export default defineComponent({
   name: 'DraggableItem',
   props: DragItemProps,
