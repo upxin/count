@@ -1,6 +1,6 @@
 import { defineComponent, ref, watch } from 'vue';
 import Draggable from 'vuedraggable';
-import { NGridItem, NTag } from 'naive-ui';
+import { NGridItem } from 'naive-ui';
 import type { DragSchema } from './interface';
 import { DragItemProps } from './interface';
 import RenderComponent from './RenderComponent.vue';
