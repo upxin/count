@@ -5,7 +5,6 @@ import type { DragSchema } from './interface';
 import { DragItemProps } from './interface';
 import RenderComponent from './RenderComponent.vue';
 
-console.log(99);
 export default defineComponent({
   name: 'DraggableItem',
   props: DragItemProps,
