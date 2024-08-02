@@ -1,10 +1,9 @@
 <script lang='ts' setup>
-const name = ref('NInput');
+import { NButton } from 'naive-ui';
 </script>
 
 <template>
   <div>
-    <component :is="name"></component>
-    <NInput></NInput>
+    <NButton></NButton>
   </div>
 </template>

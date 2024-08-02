@@ -18,6 +18,11 @@ const router = createRouter({
       path: '/drag',
       component: () => import('@/views/drag/Drag.vue'),
     },
+    {
+      name: 'test',
+      path: '/test',
+      component: () => import('@/views/test'),
+    },
   ],
 });
 

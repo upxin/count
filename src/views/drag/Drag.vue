@@ -4,9 +4,9 @@ import { ref, watch } from 'vue';
 import Draggable from 'vuedraggable';
 import { cloneDeep } from 'lodash-es';
 import { Time } from '@vicons/carbon';
-import DraggableItem from './DraggableItem.tsx';
+import DraggableItem from './DraggableItem';
 import type { DragSchema } from './interface.ts';
-import { inputComponents, layoutComponents, selectComponents } from '@/views/drag/config/index.ts';
+import { inputComponents, layoutComponents, selectComponents } from '@/views/drag/config/index';
 
 const leftComponents = [
   {

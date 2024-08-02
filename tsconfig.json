@@ -1,23 +1,15 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ESNext",
     "jsx": "preserve",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
     "jsxImportSource": "vue",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "useDefineForClassFields": true,
-    "experimentalDecorators": true,
-    "baseUrl": ".",
-    "module": "esnext",
+    "baseUrl": "./",
+    "module": "ESNext",
     "moduleResolution": "node",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
     "types": [
@@ -26,14 +18,11 @@
       "./auto-imports.d.ts",
       "./components.d.ts"
     ],
-    "allowImportingTsExtensions": true,
     "allowJs": true,
     "strict": true,
-    "importHelpers": true,
-    "noEmit": true,
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "skipLibCheck": true
   },
