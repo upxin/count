@@ -1,5 +1,18 @@
-## Customize configuration dev环境有个vue的调试工具在页面下方 不要关闭 方便调试
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+# dle
+
+This template should help get you started developing with Vue 3 in Vite.
+
+## Recommended IDE Setup
+
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+
+## Type Support for `.vue` Imports in TS
+
+TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
@@ -18,10 +31,3 @@ pnpm dev
 ```sh
 pnpm build
 ```
-
-### Naui地址
-[text](https://www.naiveui.com/zh-CN/os-theme/components/button)
-
-### eslint 使用开源大佬的配置，对应我的vscode json配置请参考根目录的vscode.json
-
-### <NButton :type="'primary'"></NButton> 类型提示要 ：type  才生效， 目前原因不明
