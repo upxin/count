@@ -58,7 +58,7 @@ const toggleNumberVisibility = () => {
   tableData.value = []
 };
 const clear = () => {
-  localStorage.setItem('ssq', '')
+  localStorage.setItem('dlt', '')
 }
 // 增加行
 const addRow = () => {
@@ -103,7 +103,7 @@ const printSelectedData = () => {
     const afterNumbers = afterRow.join(' ');
     return `${beforeNumbers} # ${afterNumbers}`;
   });
-  localStorage.setItem('ssq', JSON.stringify(printedData));
+  localStorage.setItem('dlt', JSON.stringify(printedData));
   return printedData
 };
 
@@ -140,7 +140,7 @@ function processAndAssignData(initData: string | null) {
 }
 
 onMounted(() => {
-  const initData = localStorage.getItem('ssq')
+  const initData = localStorage.getItem('dlt')
   processAndAssignData(initData)
   setInterval(() => {
     printSelectedData()
