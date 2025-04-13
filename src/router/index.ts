@@ -18,11 +18,6 @@ const router = createRouter({
       name: 'dlt',
       component: () => import('../views/dlt.vue'),
     },
-    {
-      path: '/ssqEl',
-      name: 'ssqEl',
-      component: () => import('../views/ssqEl.vue'),
-    },
   ],
 })
 

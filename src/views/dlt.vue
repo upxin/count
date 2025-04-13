@@ -1,13 +1,13 @@
 <template>
   <el-table :data="tableData" border row-key="id" height="900">
-    <el-table-column type="index" align="center" width="34" label="序号"></el-table-column>
+    <el-table-column type="index" align="center" width="64" label="序号"></el-table-column>
     <el-table-column
       v-for="(col, index) in tableColumns"
       :key="index"
       :prop="col.prop"
       :label="col.label"
       align="center"
-      width="38"
+      :width="col.prop === '#' ? 60 : 38"
     >
       <template #default="{ row }">
         <div
@@ -174,14 +174,12 @@ const addRow = () => {
   const helper = () => {
     const id = generateUniqueId()
     const obj: TableData = { id }
-    for (const element of getNewRow()) {
-      Object.assign(obj, element)
-    }
     tableData.value.push(obj)
   }
-  helper()
-  helper()
-  helper()
+  const list = new Array(20)
+  for (const element of list) {
+    helper()
+  }
 }
 
 // 保存数据

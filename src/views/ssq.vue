@@ -1,6 +1,6 @@
 <template>
   <el-table :data="tableData" border row-key="id" height="900">
-    <el-table-column type="index" align="center" width="34" label="序号"></el-table-column>
+    <el-table-column type="index" align="center" width="64" label="序号"></el-table-column>
     <el-table-column
       v-for="(col, index) in tableColumns"
       :key="index"
