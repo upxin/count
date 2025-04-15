@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineProps, watch } from 'vue';
-import { defineModel } from 'vue/macros';
 
 const props = defineProps({
   skey: {
