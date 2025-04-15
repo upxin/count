@@ -10,21 +10,22 @@
       :width="col.prop === '#' ? 60 : 38"
     >
       <template #default="{ row }">
-        <div
-          @click="handleNum(row, col.prop)"
-          :class="[
-            col.prop === '#' ? '' : 'ball',
-            hideNumbers ? 'hideNumbers' : '',
-            getClass(row, col.label, col.prop),
-          ]"
-        >
-          {{ getStr(row, col.prop, col.label) }}
+        <div @click="handleNum(row, col.prop)">
+          <div
+            :class="[
+              col.prop === '#' ? '' : 'ball',
+              hideNumbers ? 'hideNumbers' : '',
+              getClass(row, col.label, col.prop),
+            ]"
+          >
+            {{ getStr(row, col.prop, col.label) }}
+          </div>
         </div>
       </template>
     </el-table-column>
     <el-table-column label="操作" align="center">
-      <template #default="{ row }">
-        <el-button type="danger" text @click="deleteRow(row.id)">删除</el-button>
+      <template #default="{ row, $index }">
+        <el-button type="danger" text @click="deleteRow(row.id, $index)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -136,21 +137,26 @@ function getClass(row: any, label: string, prop: string) {
 
 function getData() {
   const resultMap = new Map()
+  // 假设 table 是包含 id 的数组
+
+  // 先初始化 resultMap，按 table 中的 id 顺序
+  for (const { id } of tableData.value) {
+    resultMap.set(id, { before: [], after: [] })
+  }
+
   // 遍历数据
   for (const val of selectedNumbers.value) {
     const [id, str] = val.split(',')
     const isBefore = str.startsWith('before')
     const number = str.slice(isBefore ? 6 : 5)
 
-    if (!resultMap.has(id)) {
-      resultMap.set(id, { before: [], after: [] })
-    }
-
-    const entry = resultMap.get(id)
-    if (isBefore) {
-      entry.before.push(number)
-    } else {
-      entry.after.push(number)
+    if (resultMap.has(id)) {
+      const entry = resultMap.get(id)
+      if (isBefore) {
+        entry.before.push(number)
+      } else {
+        entry.after.push(number)
+      }
     }
   }
 
@@ -164,6 +170,7 @@ function getData() {
   localStorage.setItem('ssqStr', result.join('\n'))
   return result.join('\n')
 }
+
 // 生成唯一 ID
 const generateUniqueId = () => {
   return `row-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
@@ -176,7 +183,7 @@ const addRow = () => {
     const obj: TableData = { id }
     tableData.value.push(obj)
   }
-  const list = new Array(20)
+  const list = new Array(8)
   for (const element of list) {
     helper()
   }
@@ -210,8 +217,8 @@ const toggleNumberVisibility = () => {
 }
 
 // 删除行
-const deleteRow = (uniqueId: string) => {
-  ElMessageBox.confirm(`确定要删除这一行吗？`, '提示', {
+const deleteRow = (uniqueId: string, i) => {
+  ElMessageBox.confirm(`确定要删除第 ${i + 1} 吗？`, '提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning',
@@ -223,6 +230,7 @@ const deleteRow = (uniqueId: string) => {
           selectedNumbers.value.delete(element)
         }
       }
+      saveData()
     })
     .catch(() => {
       // 用户取消删除

@@ -15,7 +15,6 @@ body {
 .el-table th.el-table__cell {
   background-color: rgba(0, 128, 0, 0.864);
   color: #fff;
-  padding: 2px 0;
 }
 .el-table--small .el-table__cell {
   padding: 0;
@@ -36,10 +35,10 @@ body {
   justify-content: center;
 }
 .ball {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  line-height: 20px;
+  line-height: 18px;
   text-align: center;
   margin: 0 auto;
 }

@@ -10,15 +10,16 @@
       :width="col.prop === '#' ? 60 : 38"
     >
       <template #default="{ row }">
-        <div
-          @click="handleNum(row, col.prop)"
-          :class="[
-            col.prop === '#' ? '' : 'ball',
-            hideNumbers ? 'hideNumbers' : '',
-            getClass(row, col.label, col.prop),
-          ]"
-        >
-          {{ getStr(row, col.prop, col.label) }}
+        <div @click="handleNum(row, col.prop)">
+          <div
+            :class="[
+              col.prop === '#' ? '' : 'ball',
+              hideNumbers ? 'hideNumbers' : '',
+              getClass(row, col.label, col.prop),
+            ]"
+          >
+            {{ getStr(row, col.prop, col.label) }}
+          </div>
         </div>
       </template>
     </el-table-column>
@@ -164,7 +165,7 @@ const addRow = () => {
     const obj: TableData = { id }
     tableData.value.push(obj)
   }
-  const list = new Array(20)
+  const list = new Array(10)
   for (const element of list) {
     helper()
   }
