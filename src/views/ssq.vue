@@ -125,21 +125,26 @@ function getClass(row: any, label: string, prop: string) {
 
 function getData() {
   const resultMap = new Map()
+  // 假设 table 是包含 id 的数组
+
+  // 先初始化 resultMap，按 table 中的 id 顺序
+  for (const { id } of tableData.value) {
+    resultMap.set(id, { before: [], after: [] })
+  }
+
   // 遍历数据
   for (const val of selectedNumbers.value) {
     const [id, str] = val.split(',')
     const isBefore = str.startsWith('before')
     const number = str.slice(isBefore ? 6 : 5)
 
-    if (!resultMap.has(id)) {
-      resultMap.set(id, { before: [], after: [] })
-    }
-
-    const entry = resultMap.get(id)
-    if (isBefore) {
-      entry.before.push(number)
-    } else {
-      entry.after.push(number)
+    if (resultMap.has(id)) {
+      const entry = resultMap.get(id)
+      if (isBefore) {
+        entry.before.push(number)
+      } else {
+        entry.after.push(number)
+      }
     }
   }
 
@@ -150,6 +155,7 @@ function getData() {
     result.push(combined)
   }
   source.value = result.join('\n')
+  console.log(result.join('\n'))
   localStorage.setItem('ssqStr', result.join('\n'))
   return result.join('\n')
 }
