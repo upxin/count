@@ -35,9 +35,7 @@
     <el-button @click="toggleNumberVisibility" type="primary">显示隐藏</el-button>
     <el-button @click="addRow" type="primary">增加行</el-button>
     <el-button @click="getData" type="success">获取字符串</el-button>
-    <el-button @click="visible = true" type="success">搜索</el-button>
   </div>
-  <Search v-model:model-value="visible" key="ssqStr"></Search>
   <div style="display: flex; justify-content: center">
     <div v-if="isSupported">
       <el-button type="primary" @click="copy(source)">
