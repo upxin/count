@@ -1,13 +1,14 @@
 <template>
-  <el-table :data="tableData" border row-key="id" height="900">
-    <el-table-column type="index" align="center" width="64" label="序号"></el-table-column>
+  <el-table :data="tableData" border row-key="id" height="900" @sort-change="handleSortChange">
+    <el-table-column type="index" align="center" width="30" label="序号"></el-table-column>
     <el-table-column
       v-for="(col, index) in tableColumns"
       :key="index"
       :prop="col.prop"
       :label="col.label"
       align="center"
-      :width="col.prop === '#' ? 60 : 38"
+      :width="col.prop === '#' ? 60 : 37"
+      :sortable="col.prop === '#' ? true : false"
     >
       <template #default="{ row }">
         <div @click="handleNum(row, col.prop)">
@@ -25,7 +26,8 @@
     </el-table-column>
     <el-table-column label="操作" align="center">
       <template #default="{ row }">
-        <el-button type="danger" text @click="deleteRow(row.id)">删除</el-button>
+        <el-button type="primary" @click="copyRow(row)">复制</el-button>
+        <el-button type="danger" @click="deleteRow(row.id)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -50,11 +52,12 @@
 import { ref, onMounted, reactive, nextTick, shallowRef, computed } from 'vue'
 import { ElMessageBox } from 'element-plus'
 import Sortable from 'sortablejs'
-import Search from './components/Search.vue'
 import { useClipboard } from '@vueuse/core'
+
 interface TableData {
   id: string
   [key: string]: string | number
+  hashCount?: number // 新增字段，用于存储 # 列对应的数字
 }
 
 interface SelectedNumbers {
@@ -64,6 +67,7 @@ interface SelectedNumbers {
 const visible = ref(false)
 const source = ref('Hello')
 const { text, copy, copied, isSupported } = useClipboard({ source })
+
 // 表格列配置
 const tableColumns = ref([
   ...Array.from({ length: 33 }, (_, i) => ({
@@ -83,14 +87,8 @@ const selectedNumbers = ref(new Set())
 const hideNumbers = ref(false)
 
 function getStr(row, prop, label) {
-  let len = 0
   if (label === '#') {
-    for (const element of selectedNumbers.value) {
-      if (element.includes('before') && element.includes(row.id)) {
-        len += 1
-      }
-    }
-    return `# ${len} #`
+    return `# ${row.hashCount || 0} #`
   }
   return label
 }
@@ -99,9 +97,10 @@ function handleNum(row: any, prop: string) {
   const key = `${row.id},${prop}`
   if (selectedNumbers.value.has(key)) {
     selectedNumbers.value.delete(key)
-    return
+  } else {
+    selectedNumbers.value.add(key)
   }
-  selectedNumbers.value.add(key)
+  updateHashCount()
   if (prop.includes('after') || prop === '#') {
     saveData()
   }
@@ -122,33 +121,25 @@ function getClass(row: any, label: string, prop: string) {
 }
 
 function getData() {
-  const resultMap = new Map()
-  // 假设 table 是包含 id 的数组
+  console.log(tableData.value)
+  console.log(selectedNumbers.value)
 
-  // 先初始化 resultMap，按 table 中的 id 顺序
-  for (const { id } of tableData.value) {
-    resultMap.set(id, { before: [], after: [] })
-  }
-
-  // 遍历数据
-  for (const val of selectedNumbers.value) {
-    const [id, str] = val.split(',')
-    const isBefore = str.startsWith('before')
-    const number = str.slice(isBefore ? 6 : 5)
-
-    if (resultMap.has(id)) {
-      const entry = resultMap.get(id)
-      if (isBefore) {
-        entry.before.push(number)
-      } else {
-        entry.after.push(number)
+  const result = []
+  for (const row of tableData.value) {
+    const before = []
+    const after = []
+    for (const val of selectedNumbers.value) {
+      const [itemId, str] = val.split(',')
+      if (itemId === row.id) {
+        const isBefore = str.startsWith('before')
+        const number = str.slice(isBefore ? 6 : 5)
+        if (isBefore) {
+          before.push(number)
+        } else {
+          after.push(number)
+        }
       }
     }
-  }
-
-  // 转换为二维数组
-  const result = []
-  for (const { before, after } of resultMap.values()) {
     const combined = [...before, '#', ...after].join(' ')
     result.push(combined)
   }
@@ -157,6 +148,7 @@ function getData() {
   localStorage.setItem('ssqStr', result.join('\n'))
   return result.join('\n')
 }
+
 // 生成唯一 ID
 const generateUniqueId = () => {
   return `row-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
@@ -173,6 +165,20 @@ const addRow = () => {
   for (const element of list) {
     helper()
   }
+  updateHashCount()
+}
+
+// 更新每一行的 hashCount 字段
+const updateHashCount = () => {
+  tableData.value.forEach((row) => {
+    let count = 0
+    for (const element of selectedNumbers.value) {
+      if (element.includes('before') && element.includes(row.id)) {
+        count++
+      }
+    }
+    row.hashCount = count
+  })
 }
 
 // 保存数据
@@ -195,6 +201,7 @@ const loadData = () => {
   const tD = localStorage.getItem('ssqTable') as string
   selectedNumbers.value = new Set(JSON.parse(sD) || new Set())
   tableData.value = JSON.parse(tD) || []
+  updateHashCount()
 }
 
 // 显示隐藏功能
@@ -216,10 +223,30 @@ const deleteRow = (uniqueId: string) => {
           selectedNumbers.value.delete(element)
         }
       }
+      updateHashCount()
     })
     .catch(() => {
       // 用户取消删除
     })
+}
+const copyRow = (row: TableData) => {
+  const newId = generateUniqueId()
+  const newRow = { ...row, id: newId }
+  const currentIndex = tableData.value.findIndex((r) => r.id === row.id)
+  tableData.value.splice(currentIndex + 1, 0, newRow)
+
+  // 复制选中的数字
+  const newSelectedNumbers = new Set(selectedNumbers.value)
+  for (const element of selectedNumbers.value) {
+    if (element.includes(row.id)) {
+      const newElement = element.replace(row.id, newId)
+      newSelectedNumbers.add(newElement)
+    }
+  }
+  selectedNumbers.value = newSelectedNumbers
+
+  updateHashCount()
+  saveData()
 }
 
 // 修改后的拖拽处理函数
@@ -246,6 +273,18 @@ const initSortable = () => {
     })
   }
 }
+
+// 处理排序变化
+const handleSortChange = (sort) => {
+  if (sort.prop === '#') {
+    const newData = [...tableData.value]
+    newData.sort((a, b) => {
+      return (b.hashCount || 0) - (a.hashCount || 0)
+    })
+    tableData.value = newData
+  }
+}
+
 onMounted(() => {
   loadData()
   // 初始化拖拽
@@ -254,3 +293,7 @@ onMounted(() => {
   })
 })
 </script>
+
+<style scoped>
+/* 可根据需要添加样式 */
+</style>
