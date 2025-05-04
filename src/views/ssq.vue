@@ -1,13 +1,14 @@
 <template>
   <el-table :data="tableData" border row-key="id" height="900" @sort-change="handleSortChange">
-    <el-table-column type="index" align="center" width="30" label="序号"></el-table-column>
+    <el-table-column type="index" align="center" label="序号"></el-table-column>
+    <el-table-column></el-table-column>
     <el-table-column
       v-for="(col, index) in tableColumns"
       :key="index"
       :prop="col.prop"
       :label="col.label"
       align="center"
-      :width="col.prop === '#' ? 60 : 37"
+      :width="col.prop === '#' ? 60 : 22"
       :sortable="col.prop === '#' ? true : false"
     >
       <template #default="{ row }">
