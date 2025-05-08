@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" border row-key="id" height="900" @sort-change="handleSortChange">
+  <el-table :data="tableData" border row-key="id" height="700" @sort-change="handleSortChange">
     <el-table-column type="index" align="center" label="序号"></el-table-column>
     <el-table-column></el-table-column>
     <el-table-column
