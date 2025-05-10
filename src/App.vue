@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import Random from './random.vue';
+import Random from './random.vue'
 </script>
 
 <template>
   <el-config-provider size="small">
-    <!-- <RouterView /> -->
-    <Random></Random>
+    <RouterView />
   </el-config-provider>
 </template>
